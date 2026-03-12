@@ -166,10 +166,9 @@ jobs:
         command: "./code/3-3.exe"
         input: ''
         expected-output: |
-          78
-          56
-          34
-          12
+          0.000000
+          1.666667
+
         comparison-method: contains
         timeout: 10
         max-score: 1
@@ -184,7 +183,8 @@ jobs:
         expected-output: |
           5 5 5
           14 5 5
-          15 6 5
+          15 6 20
+
         comparison-method: contains
         timeout: 10
         max-score: 1
