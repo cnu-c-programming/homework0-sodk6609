@@ -13,11 +13,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Test1
-      id: test1
+    - name: test1-1
+      id: test1-1
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: Test1
+        test-name: test1-1
         setup-command: gcc code/1-1.c -o code/1-1.exe
         command: "./code/1-1.exe"
         input: " "
@@ -31,10 +31,27 @@ jobs:
           exp : 3.141592e+00
         comparison-method: contains
         timeout: 10
-        max-score: 10
+        max-score: 1
+    - name: test1-2
+      id: test1-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test1-2
+        setup-command: gcc code/1-2.c -o code/1-2.exe
+        command: "./code/1-2.exe"
+        input: ''
+        expected-output: |2
+                name         id      value
+                 kim 0000000012       4.12
+                 lee 0000001922       3.21
+                park 0000000432       1.00
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        TEST1_RESULTS: "${{steps.test1.outputs.result}}"
+        TEST1-1_RESULTS: "${{steps.test1-1.outputs.result}}"
+        TEST1-2_RESULTS: "${{steps.test1-2.outputs.result}}"
       with:
-        runners: test1
+        runners: test1-1,test1-2
